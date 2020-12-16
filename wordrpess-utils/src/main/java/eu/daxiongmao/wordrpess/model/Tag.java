@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class TagDTO implements Serializable {
+public class Tag implements Serializable {
 
     /** Tag slug. Unique string to identify this object in DB. It cannot contains spaces. */
     @EqualsAndHashCode.Include

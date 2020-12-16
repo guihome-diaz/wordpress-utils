@@ -3,6 +3,8 @@ package eu.daxiongmao.wordrpess.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Main attributes of the website
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * @since 2020-12
  */
 @Data
-public class WebsiteDTO implements Serializable {
+public class Website implements Serializable {
 
     /** Website title */
     private String title;
@@ -21,5 +23,11 @@ public class WebsiteDTO implements Serializable {
 
     /** Website description (to be display in search engine). */
     private String description;
+
+    /** Website's categories. Each post can be linked to one or many categories. Fields: &lt;wp:category&gt; */
+    private final Set<Category> categories = new HashSet<>();
+
+    /** Website's authors. Each author can have many posts. Fields: &lt;wp:author&gt; */
+    private final Set<Author> authors = new HashSet<>();
 
 }
