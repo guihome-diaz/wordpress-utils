@@ -41,6 +41,7 @@ public enum WpCliXmlTag {
     ITEM_STATUS("wp:status", Item.class, ITEM.getXmlTag()),
     ITEM_TYPE("wp:post_type", Item.class, ITEM.getXmlTag()),
     ITEM_ATTACHMENT_URL("wp:attachment_url", ItemAttachment.class, ITEM.getXmlTag()),
+    ITEM_CATEGORY("category", Item.class, ITEM.getXmlTag()),
 
     ITEM_POST_META("wp:postmeta", PostMeta.class, ITEM.getXmlTag()),
     ITEM_POST_META_KEY("wp:meta_key", PostMeta.class, ITEM_POST_META.getXmlTag()),

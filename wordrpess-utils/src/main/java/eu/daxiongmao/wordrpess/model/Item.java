@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * Generic item.<br>
@@ -32,7 +32,7 @@ public class Item implements Serializable {
     private String title;
 
     /** Publication date (GMT). Field &lt;wp:post_date_gmt&gt; */
-    private LocalDateTime publicationDateGmt;
+    private ZonedDateTime publicationDateGmt;
 
     /** Author / Creator. Field &lt;dc:creator&gt; */
     private String author;

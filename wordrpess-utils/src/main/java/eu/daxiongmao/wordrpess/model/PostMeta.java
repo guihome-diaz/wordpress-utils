@@ -1,5 +1,7 @@
 package eu.daxiongmao.wordrpess.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ import java.io.Serializable;
  * @author Guillaume Diaz
  * @since 2020-12
  */
+@Data
 public class PostMeta implements Serializable {
 
     /** Name of the meta. Field: &lt;wp:meta_key&gt; */

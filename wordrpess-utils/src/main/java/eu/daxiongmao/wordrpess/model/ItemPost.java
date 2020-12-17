@@ -7,10 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Post.<br>
+ * Post (= Item with a particular post type 'Item').<br>
  *     <code>
  *         &lt;item&gt;<br>
+ *             ..<br>
  *         &nbsp;&nbsp;&lt;wp:post_type&gt;post&lt;/wp:post_type&gt;<br>
+ *             ..<br>
  *         &lt;/item&gt;<br>
  *     </code>
  * @version 1.0 (based on WP-CLI WXR export)

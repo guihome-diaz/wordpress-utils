@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * Post's comment.<br>
@@ -32,7 +32,7 @@ public class Comment implements Serializable {
     private String authorEmail;
 
     /** Comment's date (gmt). Field: &lt;wp:comment_date_gmt&gt; */
-    private LocalDateTime publicationDateGmt;
+    private ZonedDateTime publicationDateGmt;
 
     /** Comment's content. Field: &lt;wp:comment_content&gt; */
     private String content;
