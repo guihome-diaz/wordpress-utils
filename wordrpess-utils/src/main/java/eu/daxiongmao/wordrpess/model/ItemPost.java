@@ -36,9 +36,14 @@ public class ItemPost extends Item {
     private final Set<String> tags = new HashSet<>();
 
     /**
-     * Optional: posts' comments. Field: &lt;wp:comment&gt;
+     * Optional: post's comments. Fields: &lt;wp:comment&gt;
      */
     private final Set<Comment> comments = new HashSet<>();
+
+    /**
+     * Optional: post's metadata. Fields: &lt;wp:postmeta&gt;
+     */
+    private final Set<PostMeta> metadata = new HashSet<>();
 
     /**
      * <p>

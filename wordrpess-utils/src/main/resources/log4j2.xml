@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NB : ${catalina.base} is replaced by maven filtering mechanism -->
+<!-- put this variable into your settings.xml and activate maven filtering mechanism : -->
+<!-- <catalina.base>C:\APPS\EP-Foundry\tools\tomcat\c4t-trunk-7.0.61-ep-01</catalina.base> -->
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <ThresholdFilter level="DEBUG" />
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5p] [%t] [%c] %msg%n" />
+        </Console>
+
+        <!-- INFO FILE -->
+        <RollingFile name="WP-UTILS" fileName="${user.home}/logs/wp-utils/wp-utils.log"
+                     filePattern="${user.home}/logs/wp-utils/wp-utils.%d{yyyy-MM-dd}.%i.log">
+            <ThresholdFilter level="INFO"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] [%t] [%c{1}] %msg%n" />
+            <Policies>
+                <!-- we choose to use size based instead of time because if an unexpected error appear we can have issue to download an open the file quickly.  -->
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- ==================================== -->
+        <!-- 3rd parties libraries and frameworks -->
+        <!-- ==================================== -->
+        <Logger name="org.hibernate" level="WARN" />
+        <Logger name="org.springframework" level="INFO" />
+        <Logger name="com.zaxxer" level="WARN" />
+        <Logger name="org.apache.tomcat" level="WARN" />
+
+        <!-- ================= -->
+        <!-- C4T business logs -->
+        <!-- ================= -->
+        <Logger name="eu.daxiongmao" level="DEBUG" />
+
+        <!-- ==================================== -->
+        <!-- root level to add the logs to enable -->
+        <!-- ==================================== -->
+        <!-- the root level must be the lowest as possible to enable logging in the lowest appender level -->
+        <!-- then you can filter by appender to only show a specific level -->
+        <Root level="DEBUG">
+            <AppenderRef ref="CONSOLE" />
+            <AppenderRef ref="WP-UTILS" />
+        </Root>
+    </Loggers>
+</Configuration>

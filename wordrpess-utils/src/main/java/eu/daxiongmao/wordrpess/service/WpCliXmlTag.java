@@ -1,7 +1,5 @@
 package eu.daxiongmao.wordrpess.service;
 
-import eu.daxiongmao.wordrpess.model.*;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,53 +12,50 @@ import java.util.Map;
  */
 public enum WpCliXmlTag {
 
-    WEBSITE_TITLE("title", Website.class, null),
-    WEBSITE_DESCRIPTION("description", Website.class, null),
-    WEBSITE_ROOT_URL("link", Website.class, null),
+    WEBSITE_TITLE("title", null),
+    WEBSITE_DESCRIPTION("description", null),
+    WEBSITE_ROOT_URL("link", null),
 
-    AUTHOR("wp:author", Author.class, null),
-    AUTHOR_LOGIN("wp:author_login", Author.class, AUTHOR.getXmlTag()),
-    AUTHOR_EMAIL("wp:author_email", Author.class, AUTHOR.getXmlTag()),
-    AUTHOR_DISPLAY_NAME("wp:author_display_name", Author.class, AUTHOR.getXmlTag()),
-    AUTHOR_FIRST_NAME("wp:author_first_name", Author.class, AUTHOR.getXmlTag()),
-    AUTHOR_LAST_NAME("wp:author_last_name", Author.class, AUTHOR.getXmlTag()),
+    AUTHOR("wp:author", null),
+    AUTHOR_LOGIN("wp:author_login", AUTHOR.getXmlTag()),
+    AUTHOR_EMAIL("wp:author_email", AUTHOR.getXmlTag()),
+    AUTHOR_DISPLAY_NAME("wp:author_display_name", AUTHOR.getXmlTag()),
+    AUTHOR_FIRST_NAME("wp:author_first_name", AUTHOR.getXmlTag()),
+    AUTHOR_LAST_NAME("wp:author_last_name", AUTHOR.getXmlTag()),
 
-    CATEGORY("wp:category", Category.class, null),
-    CATEGORY_SLUG("wp:category_nicename", Category.class, CATEGORY.getXmlTag()),
-    CATEGORY_NAME("wp:cat_name", Category.class, CATEGORY.getXmlTag()),
-    CATEGORY_PARENT("wp:category_parent", Category.class, CATEGORY.getXmlTag()),
+    CATEGORY("wp:category", null),
+    CATEGORY_SLUG("wp:category_nicename", CATEGORY.getXmlTag()),
+    CATEGORY_NAME("wp:cat_name", CATEGORY.getXmlTag()),
+    CATEGORY_PARENT("wp:category_parent", CATEGORY.getXmlTag()),
 
-    ITEM("item", Item.class, null),
-    ITEM_TITLE("title", Item.class, ITEM.getXmlTag()),
-    ITEM_AUTHOR("dc:creator", Item.class, ITEM.getXmlTag()),
-    ITEM_DESCRIPTION("description", Item.class, ITEM.getXmlTag()),
-    ITEM_CONTENT("content:encoded", Item.class, ITEM.getXmlTag()),
-    ITEM_EXCERPT("excerpt:encoded", Item.class, ITEM.getXmlTag()),
-    ITEM_PUBLICATION_DATE_GMT("wp:post_date_gmt", Item.class, ITEM.getXmlTag()),
-    ITEM_NAME("wp:post_name", Item.class, ITEM.getXmlTag()),
-    ITEM_STATUS("wp:status", Item.class, ITEM.getXmlTag()),
-    ITEM_TYPE("wp:post_type", Item.class, ITEM.getXmlTag()),
-    ITEM_ATTACHMENT_URL("wp:attachment_url", ItemAttachment.class, ITEM.getXmlTag()),
-    ITEM_CATEGORY("category", Item.class, ITEM.getXmlTag()),
+    ITEM("item", null),
+    ITEM_TITLE("title", ITEM.getXmlTag()),
+    ITEM_AUTHOR("dc:creator", ITEM.getXmlTag()),
+    ITEM_DESCRIPTION("description", ITEM.getXmlTag()),
+    ITEM_CONTENT("content:encoded", ITEM.getXmlTag()),
+    ITEM_EXCERPT("excerpt:encoded", ITEM.getXmlTag()),
+    ITEM_PUBLICATION_DATE_GMT("wp:post_date_gmt", ITEM.getXmlTag()),
+    ITEM_NAME("wp:post_name", ITEM.getXmlTag()),
+    ITEM_STATUS("wp:status", ITEM.getXmlTag()),
+    ITEM_TYPE("wp:post_type", ITEM.getXmlTag()),
+    ITEM_ATTACHMENT_URL("wp:attachment_url", ITEM.getXmlTag()),
+    ITEM_CATEGORY("category", ITEM.getXmlTag()),
 
-    ITEM_POST_META("wp:postmeta", PostMeta.class, ITEM.getXmlTag()),
-    ITEM_POST_META_KEY("wp:meta_key", PostMeta.class, ITEM_POST_META.getXmlTag()),
-    ITEM_POST_META_VALUE("wp:meta_value", PostMeta.class, ITEM_POST_META.getXmlTag()),
+    ITEM_POST_META("wp:postmeta", ITEM.getXmlTag()),
+    ITEM_POST_META_KEY("wp:meta_key", ITEM_POST_META.getXmlTag()),
+    ITEM_POST_META_VALUE("wp:meta_value", ITEM_POST_META.getXmlTag()),
 
-    ITEM_COMMENT("wp:comment", Comment.class, ITEM.getXmlTag()),
-    ITEM_COMMENT_ID("wp:comment_id", Comment.class, ITEM_COMMENT.getXmlTag()),
-    ITEM_COMMENT_AUTHOR("wp:comment_author", Comment.class, ITEM_COMMENT.getXmlTag()),
-    ITEM_COMMENT_AUTHOR_EMAIL("wp:comment_author_email", Comment.class, ITEM_COMMENT.getXmlTag()),
-    ITEM_COMMENT_PUBLICATION_DATE_GMT("wp:comment_date_gmt", Comment.class, ITEM_COMMENT.getXmlTag()),
-    ITEM_COMMENT_CONTENT("wp:comment_content", Comment.class, ITEM_COMMENT.getXmlTag())
+    ITEM_COMMENT("wp:comment", ITEM.getXmlTag()),
+    ITEM_COMMENT_ID("wp:comment_id", ITEM_COMMENT.getXmlTag()),
+    ITEM_COMMENT_AUTHOR("wp:comment_author", ITEM_COMMENT.getXmlTag()),
+    ITEM_COMMENT_AUTHOR_EMAIL("wp:comment_author_email", ITEM_COMMENT.getXmlTag()),
+    ITEM_COMMENT_PUBLICATION_DATE_GMT("wp:comment_date_gmt", ITEM_COMMENT.getXmlTag()),
+    ITEM_COMMENT_CONTENT("wp:comment_content", ITEM_COMMENT.getXmlTag())
 
     ;
 
     /** Real XML tag, as it appears in the file. */
     private String xmlTag;
-
-    /** Corresponding class to work with for that tag */
-    private Class clazz;
 
     /** Parent tag, if applicable. */
     private String parent;
@@ -81,14 +76,9 @@ public enum WpCliXmlTag {
         Arrays.stream(WpCliXmlTag.values()).forEach(tag -> tagsMapping.put((tag.getParent() != null ? tag.getParent() + "/" : "") + tag.getXmlTag(), tag));
     }
 
-    WpCliXmlTag(final String xmlTag, final Class clazz, final String parent) {
+    WpCliXmlTag(final String xmlTag, final String parent) {
         this.xmlTag = xmlTag;
-        this.clazz = clazz;
         this.parent = parent;
-    }
-
-    public Class getClazz() {
-        return clazz;
     }
 
     private String getParent() {

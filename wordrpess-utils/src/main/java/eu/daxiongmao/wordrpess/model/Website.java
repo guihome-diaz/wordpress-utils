@@ -30,4 +30,6 @@ public class Website implements Serializable {
     /** Website's authors. Each author can have many posts. Fields: &lt;wp:author&gt; */
     private final Set<Author> authors = new HashSet<>();
 
+    /** Website's items. */
+    private final Set<Item> items = new HashSet<>();
 }

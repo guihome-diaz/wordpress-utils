@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * Item status.<br>
+ * Item metadata.<br>
  *     <code>
  *         &lt;wp:postmeta&gt;<br>
  *             &nbsp;&nbsp;&lt;wp:meta_key&gt;key&lt;/wp:meta_key&gt;<br>
