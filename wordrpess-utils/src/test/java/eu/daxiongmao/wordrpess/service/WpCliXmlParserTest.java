@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordrpess.service;
 
 import eu.daxiongmao.wordrpess.model.Website;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+@Log4j2
 @SpringBootTest
 public class WpCliXmlParserTest {
 
@@ -24,6 +26,11 @@ public class WpCliXmlParserTest {
 
         Optional<Website> website = parser.parseWpCliExportFile(xmlTestFile);
         Assertions.assertTrue(website.isPresent());
+        Assertions.assertEquals(2, website.get().getAuthors().size());
+        Assertions.assertEquals(96, website.get().getCategories().size());
+        Assertions.assertEquals(646, website.get().getTags().size());
+        Assertions.assertEquals(15, website.get().getItems().size());
+        log.info("{} authors, {} categories, {} tags, {} items", website.get().getAuthors().size(), website.get().getCategories().size(), website.get().getTags().size(), website.get().getItems().size());
     }
 
 }

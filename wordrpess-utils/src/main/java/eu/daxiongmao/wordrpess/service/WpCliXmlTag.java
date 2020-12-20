@@ -12,23 +12,28 @@ import java.util.Map;
  */
 public enum WpCliXmlTag {
 
-    WEBSITE_TITLE("title", null),
-    WEBSITE_DESCRIPTION("description", null),
-    WEBSITE_ROOT_URL("link", null),
+    WEBSITE("channel", null),
+    WEBSITE_TITLE("title", WEBSITE.getXmlTag()),
+    WEBSITE_DESCRIPTION("description", WEBSITE.getXmlTag()),
+    WEBSITE_ROOT_URL("link", WEBSITE.getXmlTag()),
 
-    AUTHOR("wp:author", null),
+    AUTHOR("wp:author", WEBSITE.getXmlTag()),
     AUTHOR_LOGIN("wp:author_login", AUTHOR.getXmlTag()),
     AUTHOR_EMAIL("wp:author_email", AUTHOR.getXmlTag()),
     AUTHOR_DISPLAY_NAME("wp:author_display_name", AUTHOR.getXmlTag()),
     AUTHOR_FIRST_NAME("wp:author_first_name", AUTHOR.getXmlTag()),
     AUTHOR_LAST_NAME("wp:author_last_name", AUTHOR.getXmlTag()),
 
-    CATEGORY("wp:category", null),
+    CATEGORY("wp:category", WEBSITE.getXmlTag()),
     CATEGORY_SLUG("wp:category_nicename", CATEGORY.getXmlTag()),
     CATEGORY_NAME("wp:cat_name", CATEGORY.getXmlTag()),
     CATEGORY_PARENT("wp:category_parent", CATEGORY.getXmlTag()),
 
-    ITEM("item", null),
+    TAG("wp:tag", WEBSITE.getXmlTag()),
+    TAG_SLUG("wp:tag_slug", TAG.getXmlTag()),
+    TAG_NAME("wp:tag_name", TAG.getXmlTag()),
+
+    ITEM("item", WEBSITE.getXmlTag()),
     ITEM_TITLE("title", ITEM.getXmlTag()),
     ITEM_AUTHOR("dc:creator", ITEM.getXmlTag()),
     ITEM_DESCRIPTION("description", ITEM.getXmlTag()),

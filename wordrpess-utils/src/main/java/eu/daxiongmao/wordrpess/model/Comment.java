@@ -2,6 +2,7 @@ package eu.daxiongmao.wordrpess.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -35,6 +36,7 @@ public class Comment implements Serializable {
     private ZonedDateTime publicationDateGmt;
 
     /** Comment's content. Field: &lt;wp:comment_content&gt; */
+    @ToString.Exclude
     private String content;
 
 }

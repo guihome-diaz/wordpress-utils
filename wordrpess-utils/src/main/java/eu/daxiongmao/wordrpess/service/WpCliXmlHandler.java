@@ -29,10 +29,8 @@ public class WpCliXmlHandler extends DefaultHandler {
     private static final String ITEM_CATEGORY_DOMAIN_CATEGORY = "category";
     private static final String GMT_ZONE_ID = "Etc/UTC";
 
-    /**
-     * Name of the current tag that is being processed.
-     */
-    private WpCliXmlTag currentTag = null;
+    /** Current XML root and all the previous hierarchy. */
+    private final Stack<WpCliXmlTag> currentXmlTag = new Stack<>();
 
     /**
      * As we read any XML element we will push that element in the current stack.<br>
@@ -67,45 +65,45 @@ public class WpCliXmlHandler extends DefaultHandler {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes attributes) throws SAXException {
         // Get corresponding WP-Cli tag
-        currentTag = WpCliXmlTag.getTag(qName, currentTag);
-        log.debug("Current tag: {} | enum value: {}", qName, currentTag != null ? currentTag.name() : "");
+        final WpCliXmlTag tagToProcess = WpCliXmlTag.getTag(qName, (currentXmlTag.empty() ? null : currentXmlTag.peek()));
 
         // Add element name in the LIFO queue
         xmlElementStack.push(qName);
 
         // Init objects on specific tags
-        if (currentTag != null) {
-            switch (currentTag) {
+        if (tagToProcess != null) {
+            currentXmlTag.push(tagToProcess);
+            log.trace("Start tag: {} | enum value: {}", qName, tagToProcess);
+
+            switch (tagToProcess) {
                 // ***** New objects *****
                 case AUTHOR:
                     Author author = new Author();
                     this.objectStack.push(author);
-                    log.debug("Start AUTHOR tag");
                     break;
                 case CATEGORY:
                     Category category = new Category();
                     this.objectStack.push(category);
-                    log.debug("Start CATEGORY tag");
+                    break;
+                case TAG:
+                    Tag tag = new Tag();
+                    this.objectStack.push(tag);
                     break;
                 case ITEM:
                     Item item = new Item();
                     this.objectStack.push(item);
-                    log.debug("Start ITEM tag");
                     break;
                 case ITEM_POST_META:
                     PostMeta postMeta = new PostMeta();
                     this.objectStack.push(postMeta);
-                    log.debug("Start ITEM_POST_META tag");
                     break;
                 case ITEM_COMMENT:
                     Comment comment = new Comment();
                     this.objectStack.push(comment);
-                    log.debug("Start ITEM_COMMENT tag");
                     break;
                 // ***** Extract attributes *****
                 case ITEM_CATEGORY:
                     extractItemCategory(attributes);
-                    log.debug("Start ITEM_CATEGORY tag");
                     break;
 
                 default:
@@ -138,47 +136,60 @@ public class WpCliXmlHandler extends DefaultHandler {
 
         // Save value
         if (ITEM_CATEGORY_DOMAIN_TAG.equals(domain)) {
-            ((ItemPost) this.objectStack.peek()).getTags().add(nicename.trim());
+            ((Item) this.objectStack.peek()).getTags().add(nicename.trim());
         } else if (ITEM_CATEGORY_DOMAIN_CATEGORY.equals(domain)) {
-            ((ItemPost) this.objectStack.peek()).getCategories().add(nicename.trim());
+            ((Item) this.objectStack.peek()).getCategories().add(nicename.trim());
         }
     }
 
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
         // Register object on their corresponding parents
-        if (currentTag != null) {
-            switch (currentTag) {
+        if (!currentXmlTag.empty() && currentXmlTag.peek() != null) {
+            if (!currentXmlTag.peek().getXmlTag().equals(qName)) {
+                log.trace(" .. tag {} is not complete yet (qName: {})", currentXmlTag.peek(), qName);
+                return;
+            } else {
+                log.trace("completion tag {} | enum value: {}", currentXmlTag.peek().getXmlTag(), currentXmlTag.peek());
+            }
+
+            switch (currentXmlTag.peek()) {
                 // ***** New objects *****
                 case AUTHOR:
                     final Author author = ((Author) this.objectStack.pop());
                     ((Website) this.objectStack.peek()).getAuthors().add(author);
-                    log.debug("Completion AUTHOR tag: {}", author);
+                    log.debug("Completion AUTHOR: {}", author);
                     break;
                 case CATEGORY:
                     final Category category = ((Category) this.objectStack.pop());
                     ((Website) this.objectStack.peek()).getCategories().add(category);
-                    log.debug("Completion CATEGORY tag: {}", category);
+                    log.debug("Completion CATEGORY: {}", category);
+                    break;
+                case TAG:
+                    final Tag tag = ((Tag) this.objectStack.pop());
+                    ((Website) this.objectStack.peek()).getTags().add(tag);
+                    log.debug("Completion TAG: {}", tag);
                     break;
                 case ITEM:
                     final Item item = ((Item) this.objectStack.pop());
                     ((Website) this.objectStack.peek()).getItems().add(item);
-                    log.debug("Completion ITEM tag: {}", item);
+                    log.debug("Completion ITEM: {}", item);
                     break;
                 case ITEM_POST_META:
                     final PostMeta postMeta = ((PostMeta) this.objectStack.pop());
-                    ((ItemPost) this.objectStack.peek()).getMetadata().add(postMeta);
-                    log.debug("Completion POST_META tag: {}", postMeta);
+                    ((Item) this.objectStack.peek()).getMetadata().add(postMeta);
+                    log.debug("Completion POST_META: {}", postMeta);
                     break;
                 case ITEM_COMMENT:
                     final Comment comment = ((Comment) this.objectStack.pop());
-                    ((ItemPost) this.objectStack.peek()).getComments().add(comment);
-                    log.debug("Completion COMMENT tag: {}", comment);
+                    ((Item) this.objectStack.peek()).getComments().add(comment);
+                    log.debug("Completion COMMENT: {}", comment);
                     break;
                 default:
                     // Do nothing for all other attributes
                     break;
             }
+            currentXmlTag.pop();
         }
     }
 
@@ -191,8 +202,8 @@ public class WpCliXmlHandler extends DefaultHandler {
         }
 
         // Set object values
-        if (currentTag != null) {
-            switch (currentTag) {
+        if (!currentXmlTag.empty() && currentXmlTag.peek() != null) {
+            switch (currentXmlTag.peek()) {
                 case WEBSITE_TITLE:
                     ((Website) this.objectStack.peek()).setTitle(value);
                     break;
@@ -226,6 +237,13 @@ public class WpCliXmlHandler extends DefaultHandler {
                     ((Category) this.objectStack.peek()).setSlug(value);
                     break;
 
+                case TAG_SLUG:
+                    ((Tag) this.objectStack.peek()).setSlug(value);
+                    break;
+                case TAG_NAME:
+                    ((Tag) this.objectStack.peek()).setName(value);
+                    break;
+
                 case ITEM_NAME:
                     ((Item) this.objectStack.peek()).setName(value);
                     break;
@@ -255,7 +273,7 @@ public class WpCliXmlHandler extends DefaultHandler {
                     ((Item) this.objectStack.peek()).setPublicationDateGmt(itemDate);
                     break;
                 case ITEM_ATTACHMENT_URL:
-                    ((ItemAttachment) this.objectStack.peek()).setAttachmentUrl(value);
+                    ((Item) this.objectStack.peek()).setAttachmentUrl(value);
                     break;
 
                 case ITEM_POST_META_KEY:

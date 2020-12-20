@@ -27,6 +27,9 @@ public class Website implements Serializable {
     /** Website's categories. Each post can be linked to one or many categories. Fields: &lt;wp:category&gt; */
     private final Set<Category> categories = new HashSet<>();
 
+    /** Website's tags. Each post can be linked to one or many tags. Fields: &lt;wp:tag&gt; */
+    private final Set<Tag> tags = new HashSet<>();
+
     /** Website's authors. Each author can have many posts. Fields: &lt;wp:author&gt; */
     private final Set<Author> authors = new HashSet<>();
 
