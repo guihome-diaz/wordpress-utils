@@ -1,6 +1,6 @@
-package eu.daxiongmao.wordrpess.service;
+package eu.daxiongmao.wordpress.wxr.xml;
 
-import eu.daxiongmao.wordrpess.model.Website;
+import eu.daxiongmao.wordpress.wxr.model.Website;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

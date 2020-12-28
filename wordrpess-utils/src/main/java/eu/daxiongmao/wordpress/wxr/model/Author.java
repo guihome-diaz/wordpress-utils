@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordrpess.model;
+package eu.daxiongmao.wordpress.wxr.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +16,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Author implements Serializable {
+
+    /** User ID. Field &lt;wp:author_id&gt;
+     */
+    private Integer id;
 
     /** User login. Field: &lt;wp:author_login&gt; */
     @EqualsAndHashCode.Include

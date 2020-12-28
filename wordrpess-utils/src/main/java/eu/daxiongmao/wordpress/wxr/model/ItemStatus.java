@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordrpess.model;
+package eu.daxiongmao.wordpress.wxr.model;
 
 /**
  * Item status. &lt;wp:status&gt;

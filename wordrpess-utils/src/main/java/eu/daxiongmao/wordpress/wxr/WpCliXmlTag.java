@@ -1,23 +1,31 @@
-package eu.daxiongmao.wordrpess.service;
+package eu.daxiongmao.wordpress.wxr;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * List of XML tags to process with SAX parser.
- * @version 1.0 (based on WP-CLI WXR export)
+ * List of XML tags to process with SAX parser to read/write Wordpress eXchange format Rule (WXR) files.
+ * @version 1.0 (based on WP-CLI WXR export). This is based on WXR version 1.2
+ * (see <a href="https://github.com/wp-cli/export-command/blob/master/src/WP_Export_WXR_Formatter.php">WP-CLI github</a>
  * @author Guillaume Diaz
  * @since 2020-12
  */
 public enum WpCliXmlTag {
 
+    /** WXR document start */
     WEBSITE("channel", null),
+    /** Wordpress $metadata['name'] */
     WEBSITE_TITLE("title", WEBSITE.getXmlTag()),
+    /** Wordpress $metadata['description'] */
     WEBSITE_DESCRIPTION("description", WEBSITE.getXmlTag()),
-    WEBSITE_ROOT_URL("link", WEBSITE.getXmlTag()),
+    /** Wordpress $metadata['url'] */
+    WEBSITE_URL("link", WEBSITE.getXmlTag()),
+    /** Wordpress $metadata['language'] */
+    WEBSITE_LANGUAGE("language", WEBSITE.getXmlTag()),
 
     AUTHOR("wp:author", WEBSITE.getXmlTag()),
+    AUTHOR_ID("wp:author_id", AUTHOR.getXmlTag()),
     AUTHOR_LOGIN("wp:author_login", AUTHOR.getXmlTag()),
     AUTHOR_EMAIL("wp:author_email", AUTHOR.getXmlTag()),
     AUTHOR_DISPLAY_NAME("wp:author_display_name", AUTHOR.getXmlTag()),
@@ -25,11 +33,13 @@ public enum WpCliXmlTag {
     AUTHOR_LAST_NAME("wp:author_last_name", AUTHOR.getXmlTag()),
 
     CATEGORY("wp:category", WEBSITE.getXmlTag()),
+    CATEGORY_ID("wp:term_id", CATEGORY.getXmlTag()),
     CATEGORY_SLUG("wp:category_nicename", CATEGORY.getXmlTag()),
     CATEGORY_NAME("wp:cat_name", CATEGORY.getXmlTag()),
     CATEGORY_PARENT("wp:category_parent", CATEGORY.getXmlTag()),
 
     TAG("wp:tag", WEBSITE.getXmlTag()),
+    TAG_ID("wp:term_id", TAG.xmlTag),
     TAG_SLUG("wp:tag_slug", TAG.getXmlTag()),
     TAG_NAME("wp:tag_name", TAG.getXmlTag()),
 

@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordrpess.service;
+package eu.daxiongmao.wordpress.wxr;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

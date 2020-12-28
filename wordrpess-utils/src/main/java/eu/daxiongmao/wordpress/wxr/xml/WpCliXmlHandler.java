@@ -1,6 +1,7 @@
-package eu.daxiongmao.wordrpess.service;
+package eu.daxiongmao.wordpress.wxr.xml;
 
-import eu.daxiongmao.wordrpess.model.*;
+import eu.daxiongmao.wordpress.wxr.WpCliXmlTag;
+import eu.daxiongmao.wordpress.wxr.model.*;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
@@ -58,6 +59,7 @@ public class WpCliXmlHandler extends DefaultHandler {
     public void startDocument() throws SAXException {
         // initialize the root object
         final Website website = new Website();
+        this.website = website;
         objectStack.push(website);
         log.debug("Start XML file parsing");
     }
@@ -162,7 +164,10 @@ public class WpCliXmlHandler extends DefaultHandler {
                     break;
                 case CATEGORY:
                     final Category category = ((Category) this.objectStack.pop());
-                    ((Website) this.objectStack.peek()).getCategories().add(category);
+                    if (StringUtils.isNotBlank(category.getParentCategorySlug())) {
+                        category.setParent(website.getCategories().get(category.getParentCategorySlug()));
+                    }
+                    ((Website) this.objectStack.peek()).getCategories().put(category.getSlug(), category);
                     log.debug("Completion CATEGORY: {}", category);
                     break;
                 case TAG:
@@ -210,10 +215,15 @@ public class WpCliXmlHandler extends DefaultHandler {
                 case WEBSITE_DESCRIPTION:
                     ((Website) this.objectStack.peek()).setDescription(value);
                     break;
-                case WEBSITE_ROOT_URL:
-                    ((Website) this.objectStack.peek()).setRootUrl(value);
+                case WEBSITE_URL:
+                    ((Website) this.objectStack.peek()).setUrl(value);
+                    break;
+                case WEBSITE_LANGUAGE:
+                    ((Website) this.objectStack.peek()).setLanguage(value);
                     break;
 
+                case AUTHOR_ID:
+                    ((Author) this.objectStack.peek()).setId(Integer.valueOf(value));
                 case AUTHOR_DISPLAY_NAME:
                     ((Author) this.objectStack.peek()).setDisplayName(value);
                     break;
@@ -230,13 +240,22 @@ public class WpCliXmlHandler extends DefaultHandler {
                     ((Author) this.objectStack.peek()).setLogin(value);
                     break;
 
+                case CATEGORY_ID:
+                    ((Category) this.objectStack.peek()).setId(Integer.valueOf(value));
+                    break;
                 case CATEGORY_NAME:
                     ((Category) this.objectStack.peek()).setName(value);
                     break;
                 case CATEGORY_SLUG:
                     ((Category) this.objectStack.peek()).setSlug(value);
                     break;
+                case CATEGORY_PARENT:
+                    ((Category) this.objectStack.peek()).setParentCategorySlug(value);
+                    break;
 
+                case TAG_ID:
+                    ((Tag) this.objectStack.peek()).setId(Integer.valueOf(value));
+                    break;
                 case TAG_SLUG:
                     ((Tag) this.objectStack.peek()).setSlug(value);
                     break;
@@ -310,6 +329,8 @@ public class WpCliXmlHandler extends DefaultHandler {
     public void endDocument() throws SAXException {
         // initialize the root object
         this.website = (Website) objectStack.pop();
+        // Populate the parents' categories - if any
+        website.updateCategoriesRelationships();
     }
 
     public Website getWebsite() {

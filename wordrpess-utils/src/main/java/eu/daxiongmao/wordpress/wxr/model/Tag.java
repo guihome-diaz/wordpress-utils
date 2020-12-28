@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordrpess.model;
+package eu.daxiongmao.wordpress.wxr.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +14,9 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Tag implements Serializable {
+
+    /** Tag ID. Field &lt;wp:term_id&gt; */
+    private Integer id;
 
     /** Tag slug. Unique string to identify this object in DB. It cannot contains spaces. Field: &lt;wp:tag_slug&gt; */
     @EqualsAndHashCode.Include

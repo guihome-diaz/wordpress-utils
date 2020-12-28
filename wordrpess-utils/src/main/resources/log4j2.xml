@@ -25,9 +25,14 @@
         <!-- ==================================== -->
         <!-- 3rd parties libraries and frameworks -->
         <!-- ==================================== -->
-        <Logger name="org.hibernate" level="WARN" />
-        <Logger name="org.springframework" level="INFO" />
+        <!-- Database connection pool. Just display settings and errors -->
         <Logger name="com.zaxxer" level="WARN" />
+        <Logger name="DEBUG com.zaxxer.hikari.HikariConfig" level="DEBUG" />
+        <!-- Database operations -->
+        <Logger name="org.hibernate" level="WARN" />
+        <!-- Spring framework -->
+        <Logger name="org.springframework" level="INFO" />
+        <!-- Embedded web server (Tomcat) -->
         <Logger name="org.apache.tomcat" level="WARN" />
 
         <!-- ================= -->

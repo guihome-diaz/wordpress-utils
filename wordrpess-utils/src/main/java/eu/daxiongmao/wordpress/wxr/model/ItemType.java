@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordrpess.model;
+package eu.daxiongmao.wordpress.wxr.model;
 
 /**
  * Various type of items available in the website

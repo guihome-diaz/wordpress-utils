@@ -1,7 +1,8 @@
-package eu.daxiongmao.wordrpess.model;
+package eu.daxiongmao.wordpress.wxr.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -15,6 +16,11 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category implements Serializable {
 
+    /** Category ID.
+     * Field &lt;wp:term_id&gt;
+     */
+    private Integer id;
+
     /** Category slug.
      * Unique string to identify this object in DB. It cannot contains spaces.
      * Field: &lt;wp:category_nicename&gt; */
@@ -27,6 +33,11 @@ public class Category implements Serializable {
     private String name;
 
     /** Optional link to a parent category. &lt;wp:category_parent&gt; */
+    @ToString.Include(name="parent")
     private Category parent;
+
+    /** Slug (unique name) of the parent category, if available */
+    @ToString.Exclude
+    private transient String parentCategorySlug;
 
 }

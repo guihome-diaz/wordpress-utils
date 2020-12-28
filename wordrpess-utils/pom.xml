@@ -19,6 +19,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>15</java.version>
+		<downloadSources>true</downloadSources>
+		<downloadJavadocs>true</downloadJavadocs>
 	</properties>
 
 	<dependencies>
@@ -64,12 +66,26 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 
-		<!-- Embedded database -->
+		<!-- ############### -->
+		<!-- Database driver -->
+		<!-- ############### -->
+		<!-- MariaDB / MySQL at runtime -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>2.7.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- H2 embedded database for tests -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<scope>test</scope>
 		</dependency>
+
+		<!-- ############### -->
+		<!-- Other utilities -->
+		<!-- ############### -->
 		<!-- To reduce boiler plate code -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -82,15 +98,23 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.11</version>
 		</dependency>
+		<!-- Commons validation (ex: emails) -->
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.7</version>
+		</dependency>
 
-
+		<!-- ##### -->
 		<!-- Tests -->
+		<!-- ##### -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
