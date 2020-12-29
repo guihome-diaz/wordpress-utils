@@ -10,15 +10,15 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**
- * Wordpress users.
+ * Wordpress core table: USERS
  * @version 1.0
  * @since 2020/12
+ * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
-            @UniqueConstraint(name = "user_uq_id", columnNames = "ID"),
             @UniqueConstraint(name = "user_uq_login", columnNames = "user_login"),
             @UniqueConstraint(name = "user_uq_email", columnNames = "user_email")
         },
@@ -29,7 +29,7 @@ import java.time.ZonedDateTime;
             @Index(name = "user_idx_nicename", columnList = "user_nicename asc")
         }
 )
-public class User implements Serializable {
+public class WpUser implements Serializable {
 
     /** Date format in DB for user registration time */
     public static final String USER_REGISTRATION_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

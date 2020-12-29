@@ -7,16 +7,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Wordpress "commentmeta".
- * These are the comments' metadata
+ * Wordpress core table:  COMMENTMETA
+ * Each comment features information called the meta data and it is stored in the wp_commentmeta.
  * @version 1.0
  * @since 2020/12
+ * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
 @Table(name = "commentmeta",
         uniqueConstraints = {
-                @UniqueConstraint(name = "commentmeta_uq_ID", columnNames = "meta_id")
+                @UniqueConstraint(name = "commentmeta_uq_id", columnNames = "meta_id")
         },
         indexes = {
                 @Index(name = "commentmeta_idx_id", columnList = "meta_id", unique = true),
@@ -24,7 +25,7 @@ import java.io.Serializable;
                 @Index(name = "commentmeta_idx_meta_key", columnList = "meta_key asc")
         }
 )
-public class CommentMeta implements Serializable {
+public class WpCommentMeta implements Serializable {
 
     /** technical identifier */
     @NonNull
@@ -34,10 +35,10 @@ public class CommentMeta implements Serializable {
     private Integer id;
 
     /** Related comment */
-    // FIXME adjust relationship @ManyToOne (Unidirectional association)
     @NonNull
-    @Column(name = "comment_id", nullable = false)
-    private Integer commentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id", nullable = false)
+    private WpComment comment;
 
     /** Metadata key */
     @NonNull

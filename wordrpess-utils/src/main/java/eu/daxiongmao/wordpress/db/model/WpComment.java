@@ -11,26 +11,28 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
 /**
- * Wordpress Comment.
+ * Wordpress core table: COMMENTS
  * A comment is linked to a particular post ID
  * @version 1.0
  * @since 2020/12
+ * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
 @Table(name = "comments",
         uniqueConstraints = {
-                @UniqueConstraint(name = "comment_uq_ID", columnNames = "comment_ID")
+                @UniqueConstraint(name = "comment_uq_id", columnNames = "comment_ID")
         },
         indexes = {
             @Index(name = "comment_idx_id", columnList = "comment_ID", unique = true),
             @Index(name = "comment_idx_parent", columnList = "comment_parent asc"),
             @Index(name = "comment_idx_date_gmt", columnList = "comment_date_gmt asc"),
             @Index(name = "comment_idx_email", columnList = "comment_author_email asc"),
-            @Index(name = "comment_idx_approved_date_gmt", columnList = "comment_approved asc, comment_author_email asc")
+            @Index(name = "comment_idx_approved_date_gmt", columnList = "comment_approved asc, comment_author_email asc"),
+            @Index(name = "comment_idx_user_id", columnList = "user_id asc")
         }
 )
-public class Comment implements Serializable {
+public class WpComment implements Serializable {
 
     /** Date format in DB for user registration time */
     public static final String COMMENT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -51,8 +53,7 @@ public class Comment implements Serializable {
     @Column(name = "comment_author", nullable = false, length = 255)
     private String authorName;
 
-    /** Comment's author's email. Optional value.
-     * If the author is a blog user, then the email will be the link between USERS and COMMENTS tables */
+    /** Comment's author's email. Optional value. */
     @Column(name = "comment_author_email", nullable = true, length = 100)
     private String authorEmail;
 
@@ -73,9 +74,10 @@ public class Comment implements Serializable {
     private ZonedDateTime commentDate = ZonedDateTime.now(ZoneId.systemDefault());
 
     /** Date-time of the comment, in GMT time zone [ie: GMT == UTC].
-     * Format is: {@link #COMMENT_TIME_FORMAT} */
-    @NonNull
-    @Column(name = "comment_date_gmt", nullable = false)
+     * Format is: {@link #COMMENT_TIME_FORMAT}<br>
+     *     This can be NULL or EMPTY because old versions of wordpress did not saved the GMT value.
+     */
+    @Column(name = "comment_date_gmt")
     private ZonedDateTime commentDateGmt = ZonedDateTime.now(ZoneOffset.UTC);
 
     /** Text to display. This text can include HTML, code snippets, and lots of strange characters.
@@ -84,15 +86,6 @@ public class Comment implements Serializable {
     @NonNull
     @Column(name = "comment_content", nullable = false, length = 65535)
     private String content;
-
-    /**
-     * Meaningless and never used column for anything except for maybe some random spam prevention plugin.
-     * It is there just for backward compatibility and because no one thinks that removing it
-     * will improve anything in a measurable way.
-     */
-    @Deprecated
-    @Column(name = "comment_karma")
-    private int karma = 0;
 
     /**
      * Comment approval status. This is a BOOLEAN (0 or 1). By default all comments are approved automatically (1).
@@ -130,19 +123,17 @@ public class Comment implements Serializable {
     private String commentType;
 
     /**
-     * Optional. Id of th parent's comment. Put '0' if it does not apply.
+     * Optional. Id of the parent's comment. Put '0' if it does not apply.
      * This is only used if the current comment is a response to another comment.
      */
     @Column(name = "comment_parent")
-    private int parentComment = 0;
+    private int parentId = 0;
 
     /**
-     * Optional. Boolean flag to know if the author is also a blog user or not.
-     * <ul>
-     *     <li>0: author is not a blog user (default)</li>
-     *     <li>1: author is a blog user that logged in before writing down his comment</li>
-     * </ul>
+     * Optional, default '0' for unknown users.
+     * If the author is a blog user, then the user_id will be the link between USERS and COMMENTS tables
      */
+    @Column(name = "user_id")
     private int userId = 0;
 
     /**
