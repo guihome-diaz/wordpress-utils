@@ -19,27 +19,26 @@ import java.io.Serializable;
  */
 @Data
 @Entity
+@IdClass(WpTermRelationshipId.class)
 @Table(name = "term_relationships",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "term_relationships_uq_id", columnNames = "object_id, term_taxonomy_id")
-        },
         indexes = {
                 @Index(name = "term_relationships_idx_id", columnList = "object_id, term_taxonomy_id", unique = true),
                 @Index(name = "term_relationships_idx_taxnmy", columnList = "term_taxonomy_id asc")
         }
 )
-public class WpTermRelationships implements Serializable {
+public class WpTermRelationship implements Serializable {
 
     /** The ID of the object the term is assigned to (ex: post or page) */
+    @Id
     @NonNull
     @Column(name = "object_id", nullable = false)
-    private Integer id;
+    private Integer objectId;
 
     /** The term_taxonomy_id (not the term_id) */
+    @Id
     @NonNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "term_taxonomy_id", nullable = false)
-    private WpTermTaxonomy taxonomy;
+    @Column(name = "term_taxonomy_id", nullable = false)
+    private Integer taxonomyId;
 
     /** The order in which the terms are assigned.
      * I haven’t seen this used heavily, it can be utilized to make sure terms appear in a given order.
