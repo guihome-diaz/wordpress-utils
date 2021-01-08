@@ -27,9 +27,9 @@
         <!-- ==================================== -->
         <!-- Database connection pool. Just display settings and errors -->
         <Logger name="com.zaxxer" level="WARN" />
-        <Logger name="DEBUG com.zaxxer.hikari.HikariConfig" level="DEBUG" />
+        <Logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG" />
         <!-- Database operations -->
-        <Logger name="org.hibernate" level="WARN" />
+        <Logger name="org.hibernate" level="INFO" />
         <!-- Spring framework -->
         <Logger name="org.springframework" level="INFO" />
         <!-- Embedded web server (Tomcat) -->
