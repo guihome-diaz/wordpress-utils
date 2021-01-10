@@ -51,7 +51,7 @@ public class WpPost implements Serializable {
      */
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_author", nullable = false)
+    @JoinColumn(name = "post_author", nullable = false, foreignKey = @ForeignKey( name = "posts_fk_users"))
     private WpUser author;
 
     /** Publication date. Format is: {@link #POST_TIME_FORMAT} */

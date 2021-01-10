@@ -37,7 +37,7 @@ public class WpCommentMeta implements Serializable {
     /** Related comment */
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id", nullable = false)
+    @JoinColumn(name = "comment_id", nullable = false, foreignKey = @ForeignKey(name = "commentmeta_fk_meta"))
     private WpComment comment;
 
     /** Metadata key */

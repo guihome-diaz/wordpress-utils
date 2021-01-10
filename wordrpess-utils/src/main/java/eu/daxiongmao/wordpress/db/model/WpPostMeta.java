@@ -38,7 +38,7 @@ public class WpPostMeta implements Serializable {
     /** Related post */
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", nullable = false, foreignKey = @ForeignKey(name = "postmeta_fk_post"))
     private WpPost post;
 
     /** Metadata key */

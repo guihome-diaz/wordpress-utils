@@ -35,7 +35,7 @@ public class WpTermTaxonomy implements Serializable {
     /** Related term */
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "term_id", nullable = false)
+    @JoinColumn(name = "term_id", nullable = false, foreignKey = @ForeignKey (name = "term_taxonomy_fk_terms"))
     private WpTerms term;
 
     /** The slug of the taxonomy.

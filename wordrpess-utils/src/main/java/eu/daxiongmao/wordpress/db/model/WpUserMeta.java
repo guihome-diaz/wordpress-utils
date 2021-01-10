@@ -34,7 +34,7 @@ public class WpUserMeta implements Serializable {
     /** Related user */
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey (name = "usermeta_fk_users"))
     private WpUser user;
 
     /** Metadata key */

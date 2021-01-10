@@ -37,7 +37,7 @@ public class WpTermMeta implements Serializable {
     /** Related term */
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "term_id", nullable = false)
+    @JoinColumn(name = "term_id", nullable = false, foreignKey = @ForeignKey(name = "termmeta_fk_term"))
     private WpTerms term;
 
     /** Metadata key */
