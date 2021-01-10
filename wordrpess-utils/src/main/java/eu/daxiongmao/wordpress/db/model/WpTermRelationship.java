@@ -32,13 +32,13 @@ public class WpTermRelationship implements Serializable {
     @Id
     @NonNull
     @Column(name = "object_id", nullable = false)
-    private Integer objectId;
+    private Long objectId;
 
     /** The term_taxonomy_id (not the term_id) */
     @Id
     @NonNull
     @Column(name = "term_taxonomy_id", nullable = false)
-    private Integer taxonomyId;
+    private Long taxonomyId;
 
     /** The order in which the terms are assigned.
      * I haven’t seen this used heavily, it can be utilized to make sure terms appear in a given order.

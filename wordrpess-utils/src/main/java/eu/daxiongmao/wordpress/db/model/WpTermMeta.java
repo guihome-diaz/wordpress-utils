@@ -32,7 +32,7 @@ public class WpTermMeta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "meta_id", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     /** Related term */
     @NonNull

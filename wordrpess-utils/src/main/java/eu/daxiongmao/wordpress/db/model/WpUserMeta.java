@@ -29,7 +29,7 @@ public class WpUserMeta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "umeta_id", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     /** Related user */
     @NonNull

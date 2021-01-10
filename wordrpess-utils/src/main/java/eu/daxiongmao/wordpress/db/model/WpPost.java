@@ -44,7 +44,7 @@ public class WpPost implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     /** Post's author. This is the USER_ID of the author.
      *  [i.e: an author must be a valid user of the blog]

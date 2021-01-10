@@ -32,7 +32,7 @@ public class WpTerms implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "term_id", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     /** The readable name of the term */
     @NonNull

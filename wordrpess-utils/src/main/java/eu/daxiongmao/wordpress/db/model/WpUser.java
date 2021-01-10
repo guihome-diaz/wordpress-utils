@@ -38,7 +38,7 @@ public class WpUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     /** User login can be a short name OR an email address. */
     @NonNull

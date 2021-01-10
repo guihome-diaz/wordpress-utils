@@ -14,9 +14,9 @@ import java.io.Serializable;
 public class WpTermRelationshipId implements Serializable {
 
     /** The ID of the object the term is assigned to (ex: post or page) */
-    private Integer objectId;
+    private Long objectId;
 
     /** The term_taxonomy_id (not the term_id) */
-    private Integer taxonomyId;
+    private Long taxonomyId;
 
 }

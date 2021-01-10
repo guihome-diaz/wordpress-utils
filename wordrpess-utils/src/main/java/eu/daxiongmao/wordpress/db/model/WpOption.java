@@ -35,7 +35,7 @@ public class WpOption implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_id", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     @NonNull
     @Column(name = "option_name", nullable = false, length = 191, unique = true)

@@ -41,7 +41,7 @@ public class WpComment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_ID", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     // FIXME set a better relationship
     @NonNull

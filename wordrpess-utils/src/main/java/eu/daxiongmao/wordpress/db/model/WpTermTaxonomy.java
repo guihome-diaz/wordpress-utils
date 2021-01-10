@@ -30,7 +30,7 @@ public class WpTermTaxonomy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "term_taxonomy_id", updatable = false, nullable = false)
-    private Integer id;
+    private Long id;
 
     /** Related term */
     @NonNull
