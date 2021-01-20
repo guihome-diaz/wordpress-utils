@@ -43,6 +43,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- To serialize / deserialize JSON objects -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+		</dependency>
+		<!-- API documentation -->
+		<!-- Swagger will be available at:     http://server:port/context-path/swagger-ui.html -->
+		<!-- OpenAPI 3 will be available at:   http://server:port/context-path/v3/api-docs -->
+		<!-- see https://springdoc.org for details -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+		</dependency>
 		<!-- Development tools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
