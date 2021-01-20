@@ -44,7 +44,9 @@ public class WpUserMeta implements Serializable {
 
     /** Metadata value */
     @NonNull
-    @Column(name = "meta_value", nullable = false, length = 65535)
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(name = "meta_value", nullable = false)
+    //@Column(name = "meta_value", nullable = false, length = 65535)
     private String value;
 
 }

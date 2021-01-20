@@ -46,7 +46,9 @@ public class WpOption implements Serializable {
      * From few words to encoded certificates, JSON or whatever.
      */
     @NonNull
-    @Column(name = "option_value", nullable = false, length = 65535)
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(name = "option_value", nullable = false)
+    // @Column(name = "option_value", nullable = false, length = 65535)
     private String value;
 
     /** Boolean value in cleartext as "yes" or "no". */

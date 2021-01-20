@@ -6,6 +6,7 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -80,12 +81,16 @@ public class WpComment implements Serializable {
     @Column(name = "comment_date_gmt")
     private ZonedDateTime commentDateGmt = ZonedDateTime.now(ZoneOffset.UTC);
 
-    /** Text to display. This text can include HTML, code snippets, and lots of strange characters.
+    /** Text to display.
+     * This text can include HTML, code snippets, and lots of strange characters.
      * It supports all languages.
+     * BLOB	max size: 64 Kb
      */
     @NonNull
-    @Column(name = "comment_content", nullable = false, length = 65535)
-    private String content;
+    @Lob
+    @Column(name = "comment_content", nullable = false)
+    // TODO add lazy loading on BLOB
+    private Blob content;
 
     /**
      * Comment approval status. This is a BOOLEAN (0 or 1). By default all comments are approved automatically (1).

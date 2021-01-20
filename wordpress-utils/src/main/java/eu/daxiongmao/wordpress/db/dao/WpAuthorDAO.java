@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * To manage wordpress authors
  */
-public class AuthorDAO {
+public class WpAuthorDAO {
 
     /**
      * To retrieve the list of blog's authors.

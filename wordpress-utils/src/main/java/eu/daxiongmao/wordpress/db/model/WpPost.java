@@ -70,6 +70,7 @@ public class WpPost implements Serializable {
      * There is no size limit [mysql longtext size].<br>
      *     /!\ Please note that content might be NULL or EMPTY for particular post types.
      */
+    @Lob @Basic(fetch = FetchType.LAZY)
     @Column(name = "post_content")
     private String content;
 
@@ -77,11 +78,15 @@ public class WpPost implements Serializable {
      * Post title.
      */
     @NonNull
-    @Column(name = "post_title", nullable = false, length = 65535)
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(name = "post_title", nullable = false)
+    //@Column(name = "post_title", nullable = false, length = 65535)
     private String title;
 
     /** Post short description to be displayed on the main page, before the content. */
-    @Column(name = "post_excerpt", length = 65535)
+    @Lob @Basic(fetch = FetchType.LAZY)
+    //@Column(name = "post_excerpt", length = 65535)
+    @Column(name = "post_excerpt")
     private String excerpt;
 
     /** Post status. Default is 'published' */

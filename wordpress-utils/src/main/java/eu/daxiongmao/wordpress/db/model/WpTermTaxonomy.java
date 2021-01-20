@@ -44,7 +44,9 @@ public class WpTermTaxonomy implements Serializable {
     @Column(name = "taxonomy", nullable = false, length = 32)
     private String taxonomy;
 
-    @Column(name = "description", nullable = true, length = 65535)
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(name = "description", nullable = true)
+    //@Column(name = "description", nullable = true, length = 65535)
     private String description;
 
     /** Optional. Id of the parent's taxonomy. Put '0' if it does not apply. */
