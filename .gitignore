@@ -448,4 +448,4 @@ composer.lock
 !.htaccess
 !/.gitignore
 !/.travis.yml
-/wordrpess-utils/target/
+/wordpress-utils/target/
