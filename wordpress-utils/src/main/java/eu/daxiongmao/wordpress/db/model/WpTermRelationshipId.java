@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @author Guillaume Diaz
  */
 @Data
+@NoArgsConstructor
 public class WpTermRelationshipId implements Serializable {
 
     /** The ID of the object the term is assigned to (ex: post or page) */

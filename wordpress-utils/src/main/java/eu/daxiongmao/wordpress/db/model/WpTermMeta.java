@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ import java.io.Serializable;
                 @Index(name = "termmeta_idx_meta_key", columnList = "meta_key asc")
         }
 )
+@NoArgsConstructor
 public class WpTermMeta implements Serializable {
 
     /** technical identifier */

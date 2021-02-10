@@ -2,11 +2,11 @@ package eu.daxiongmao.wordpress.db.model;
 
 import eu.daxiongmao.wordpress.db.utils.DbDataValidationUtils;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Blob;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -33,6 +33,7 @@ import java.time.ZonedDateTime;
             @Index(name = "comment_idx_user_id", columnList = "user_id asc")
         }
 )
+@NoArgsConstructor
 public class WpComment implements Serializable {
 
     /** Date format in DB for user registration time */
@@ -47,7 +48,7 @@ public class WpComment implements Serializable {
     // FIXME set a better relationship
     @NonNull
     @Column(name = "comment_post_ID", updatable = false, nullable = false)
-    private Integer post;
+    private Long post;
 
     /** Comment's author's display name */
     @NonNull
@@ -88,9 +89,9 @@ public class WpComment implements Serializable {
      */
     @NonNull
     @Lob
-    @Column(name = "comment_content", nullable = false)
+    @Column(columnDefinition="text", name = "comment_content", nullable = false, length = 65535)
     // TODO add lazy loading on BLOB
-    private Blob content;
+    private String content;
 
     /**
      * Comment approval status. This is a BOOLEAN (0 or 1). By default all comments are approved automatically (1).
@@ -132,14 +133,14 @@ public class WpComment implements Serializable {
      * This is only used if the current comment is a response to another comment.
      */
     @Column(name = "comment_parent")
-    private int parentId = 0;
+    private long parentId = 0;
 
     /**
      * Optional, default '0' for unknown users.
      * If the author is a blog user, then the user_id will be the link between USERS and COMMENTS tables
      */
     @Column(name = "user_id")
-    private int userId = 0;
+    private long userId = 0;
 
     /**
      * @param email user email to set. It must not be blank, and it must be a valid email according to current RFCs.

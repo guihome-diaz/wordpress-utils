@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ import java.io.Serializable;
                 @Index(name = "term_relationships_idx_taxnmy", columnList = "term_taxonomy_id asc")
         }
 )
+@NoArgsConstructor
 public class WpTermRelationship implements Serializable {
 
     /** The ID of the object the term is assigned to (ex: post or page) */

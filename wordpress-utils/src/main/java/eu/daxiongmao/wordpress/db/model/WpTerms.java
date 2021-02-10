@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ import java.io.Serializable;
                 @Index(name = "terms_idx_slug", columnList = "slug asc")
         }
 )
+@NoArgsConstructor
 public class WpTerms implements Serializable {
 
     @NonNull
@@ -47,7 +49,7 @@ public class WpTerms implements Serializable {
     /** A mechanism for creating aliases, this isn’t really used as far as I know.
      * Put '0' as default */
     @Column(name = "term_group")
-    private int group = 0;
+    private long group = 0;
 
     /**
      * Method called before every persistence operation to sanitize data.

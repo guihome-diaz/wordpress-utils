@@ -2,6 +2,7 @@ package eu.daxiongmao.wordpress.db.model;
 
 import eu.daxiongmao.wordpress.db.utils.DbDataValidationUtils;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ import java.time.ZonedDateTime;
             @Index(name = "user_idx_nicename", columnList = "user_nicename asc")
         }
 )
+@NoArgsConstructor
 public class WpUser implements Serializable {
 
     /** Date format in DB for user registration time */

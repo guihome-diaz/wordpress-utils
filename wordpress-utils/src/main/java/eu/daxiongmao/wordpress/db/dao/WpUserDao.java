@@ -20,7 +20,6 @@ public interface WpUserDao {
      */
     Optional<WpUser> findByEmail(String searchEmail);
 
-
     /**
      * To retrieve the list of blog authors.
      * IE: users that wrote articles

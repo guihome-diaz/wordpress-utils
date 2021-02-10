@@ -1,8 +1,10 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,6 +34,7 @@ import java.util.Optional;
                 @Index(name = "post_idx_type_status_date", columnList = "post_type asc, post_status, post_date, ID")
         }
 )
+@NoArgsConstructor
 public class WpPost implements Serializable {
 
     /** Date format in DB for post time (publication and updates) */
@@ -78,15 +81,14 @@ public class WpPost implements Serializable {
      * Post title.
      */
     @NonNull
-    @Lob @Basic(fetch = FetchType.LAZY)
-    @Column(name = "post_title", nullable = false)
-    //@Column(name = "post_title", nullable = false, length = 65535)
+    @Lob
+    @Column(columnDefinition = "text", name = "post_title", nullable = false, length = 65535)
     private String title;
 
     /** Post short description to be displayed on the main page, before the content. */
-    @Lob @Basic(fetch = FetchType.LAZY)
-    //@Column(name = "post_excerpt", length = 65535)
-    @Column(name = "post_excerpt")
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Column(columnDefinition="text", name = "post_excerpt", length = 65535)
     private String excerpt;
 
     /** Post status. Default is 'published' */
@@ -116,12 +118,16 @@ public class WpPost implements Serializable {
 
     /** Contains a list of URLs to ping when the post is published.
      * This is a space or carriage-return separated list */
-    @Column(name = "to_ping", length = 65535)
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Column(columnDefinition="text", name = "to_ping", length = 65535)
     private String toPing;
 
     /** Contains a list of URLs that have already been pinged.
      * This is a space or carriage-return separated list */
-    @Column(name = "pinged", length = 65535)
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Column(columnDefinition="text", name = "pinged", length = 65535)
     private String pinged;
 
     /** last modification date. Format is: {@link #POST_TIME_FORMAT} */
@@ -141,13 +147,16 @@ public class WpPost implements Serializable {
      * It can essentially act as a cache for plugins which run very resource intensive modifications on content.
      * You’ll need to take care as this field is cleared on a number of user actions like updating the post.
      */
-    @Column(name = "post_content_filtered")
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Nationalized
+    @Column(name = "post_content_filtered", nullable = true, length = 150000)
     private String contentFiltered;
 
     /** Stores the ID of the parent post if it has one.
      * Put '0' if it does not apply. */
     @Column(name = "post_parent")
-    private int parentId = 0;
+    private long parentId = 0;
 
     /** Contains the full URL of the post */
     @NonNull
@@ -171,7 +180,7 @@ public class WpPost implements Serializable {
      * This only apply to attachments.<br>
      * A JPG image would have a MIME type of image/jpeg for example
      */
-    @Column(name = "mimeType", nullable = true, length = 100)
+    @Column(name = "post_mime_type", nullable = true, length = 100)
     private String mimeType;
 
     /**
@@ -179,7 +188,7 @@ public class WpPost implements Serializable {
      * Put '0' if this is not applicable or if there are none
      */
     @Column(name = "comment_count")
-    private int commentsCount = 0;
+    private long commentsCount = 0;
 
     /**
      * @return post status as ENUM value

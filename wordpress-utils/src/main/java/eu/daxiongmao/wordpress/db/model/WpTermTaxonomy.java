@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ import java.io.Serializable;
                 @Index(name = "term_taxonomy_idx_term_taxnmy", columnList = "term_id, taxonomy asc")
         }
 )
+@NoArgsConstructor
 public class WpTermTaxonomy implements Serializable {
 
     @NonNull
@@ -51,11 +53,11 @@ public class WpTermTaxonomy implements Serializable {
 
     /** Optional. Id of the parent's taxonomy. Put '0' if it does not apply. */
     @Column(name = "parent")
-    private int parentId = 0;
+    private long parentId = 0;
 
     /** Number of occurrences. */
     @Column(name = "count")
-    private int count = 0;
+    private long count = 0;
 
     /**
      * Method called before every persistence operation to sanitize data.

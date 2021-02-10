@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ import java.io.Serializable;
                 @Index(name = "option_idx_autoload", columnList = "autoload asc")
         }
 )
+@NoArgsConstructor
 public class WpOption implements Serializable {
 
     public static String BOOLEAN_TRUE = "yes";
