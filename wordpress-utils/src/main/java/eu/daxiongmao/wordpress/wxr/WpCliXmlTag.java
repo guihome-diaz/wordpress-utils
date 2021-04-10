@@ -19,10 +19,18 @@ public enum WpCliXmlTag {
     WEBSITE_TITLE("title", WEBSITE.getXmlTag()),
     /** Wordpress $metadata['description'] */
     WEBSITE_DESCRIPTION("description", WEBSITE.getXmlTag()),
+    /** Wordpress $metadata['pubDate'] */
+    WEBSITE_PUBLICATION_DATE("pubDate", WEBSITE.getXmlTag()),
     /** Wordpress $metadata['url'] */
     WEBSITE_URL("link", WEBSITE.getXmlTag()),
     /** Wordpress $metadata['language'] */
     WEBSITE_LANGUAGE("language", WEBSITE.getXmlTag()),
+    /** WXR version */
+    WEBSITE_WXR_VERSION("wp:wxr_version", WEBSITE.getXmlTag()),
+    /** URL of the wordpress website where the export comes from */
+    WEBSITE_WORDPRESS_BASE_SITE_URL("wp:base_site_url", WEBSITE.getXmlTag()),
+    /** URL of the wordpress website where the export comes from */
+    WEBSITE_WORDPRESS_BASE_BLOG_URL("wp:base_blog_url", WEBSITE.getXmlTag()),
 
     AUTHOR("wp:author", WEBSITE.getXmlTag()),
     AUTHOR_ID("wp:author_id", AUTHOR.getXmlTag()),

@@ -221,6 +221,9 @@ public class WpCliXmlHandler extends DefaultHandler {
                 case WEBSITE_LANGUAGE:
                     ((Website) this.objectStack.peek()).setLanguage(value);
                     break;
+                case WEBSITE_WORDPRESS_BASE_SITE_URL:
+                    ((Website) this.objectStack.peek()).setWordpressBaseUrl(value);
+                    break;
 
                 case AUTHOR_ID:
                     ((Author) this.objectStack.peek()).setId(Integer.valueOf(value));

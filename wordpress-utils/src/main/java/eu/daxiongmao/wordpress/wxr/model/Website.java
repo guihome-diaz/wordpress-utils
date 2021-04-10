@@ -30,6 +30,9 @@ public class Website implements Serializable {
     /** Website main language (can be changed later on). Field: &lt;language&gt; */
     private String language;
 
+    /** URL of website that has been saved */
+    private String wordpressBaseUrl;
+
     /** Website's categories.
      * Each post can be linked to one or many categories.<br>
      * Fields: &lt;wp:category&gt;<br><br>
