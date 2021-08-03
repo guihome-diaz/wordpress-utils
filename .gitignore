@@ -26,7 +26,6 @@ $RECYCLE.BIN/
 
 ##### Linux
 *~
-.*
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
@@ -274,6 +273,9 @@ tmtags
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+.vscode
+.factorypath
+
 
 ##### NetBeans
 **/nbproject/private/
@@ -284,6 +286,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+nb-configuration.xml
 
 ##### JetBrains
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
@@ -291,6 +294,9 @@ nbdist/
 
 # User-specific stuff
 .idea/
+*.ipr
+*.iml
+*.iws
 
 # CMake
 cmake-build-*/
@@ -330,6 +336,7 @@ fabric.properties
 *.patch
 # Swap files created by editors and tools to indicate a locked file
 *.swp
+*.swo
 
 
 ##### Eclipse
@@ -338,12 +345,13 @@ bin/
 tmp/
 *.tmp
 *.bak
-*.swp
 *~.nib
 local.properties
 .settings/
 .loadpath
 .recommenders
+.project
+.classpath
 
 # External tool builders
 .externalToolBuilders/
@@ -449,3 +457,20 @@ composer.lock
 !/.gitignore
 !/.travis.yml
 /wordpress-utils/target/
+
+#maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# Eclipse
+.project
+.classpath
+
+# patch
+*.rej
+
+# Local environment
+.env

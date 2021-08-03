@@ -1,5 +1,6 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -26,7 +27,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class WpTermTaxonomy implements Serializable {
+public class WpTermTaxonomy extends PanacheEntityBase implements Serializable {
 
     @NonNull
     @Id

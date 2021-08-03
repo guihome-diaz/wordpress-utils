@@ -1,25 +1,25 @@
 package eu.daxiongmao.wordpress.wxr.xml;
 
 import eu.daxiongmao.wordpress.wxr.model.Website;
+import io.quarkus.test.junit.QuarkusTest;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
 @Log4j2
-@SpringBootTest
+@QuarkusTest
 public class WpCliXmlWriterTest {
 
-    @Autowired
+    @Inject
     private WpCliXmlParser parser;
 
-    @Autowired
+    @Inject
     private WpCliXmlWriter writer;
 
     @Test

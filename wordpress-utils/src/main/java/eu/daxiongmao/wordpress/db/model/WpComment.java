@@ -1,6 +1,7 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import eu.daxiongmao.wordpress.db.utils.DbDataValidationUtils;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -34,7 +35,7 @@ import java.time.ZonedDateTime;
         }
 )
 @NoArgsConstructor
-public class WpComment implements Serializable {
+public class WpComment extends PanacheEntityBase implements Serializable {
 
     /** Date format in DB for user registration time */
     public static final String COMMENT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

@@ -1,5 +1,6 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -28,7 +29,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class WpTermRelationship implements Serializable {
+public class WpTermRelationship extends PanacheEntityBase implements Serializable {
 
     /** The ID of the object the term is assigned to (ex: post or page) */
     @Id

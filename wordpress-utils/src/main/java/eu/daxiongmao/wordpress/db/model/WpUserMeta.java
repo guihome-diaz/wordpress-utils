@@ -1,5 +1,6 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -24,7 +25,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class WpUserMeta implements Serializable {
+public class WpUserMeta extends PanacheEntityBase implements Serializable {
 
     /** technical identifier */
     @NonNull

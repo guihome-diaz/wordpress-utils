@@ -4,10 +4,10 @@ import eu.daxiongmao.wordpress.wxr.WpCliXmlTag;
 import eu.daxiongmao.wordpress.wxr.model.*;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -28,7 +28,7 @@ import java.time.format.DateTimeFormatter;
  * @since 2020/12
  */
 @Log4j2
-@Component
+@ApplicationScoped
 public class WpCliXmlWriter {
 
     private final String WXR_VERSION = "1.2";

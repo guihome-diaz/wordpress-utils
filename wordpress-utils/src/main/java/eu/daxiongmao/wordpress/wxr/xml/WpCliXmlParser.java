@@ -2,8 +2,8 @@ package eu.daxiongmao.wordpress.wxr.xml;
 
 import eu.daxiongmao.wordpress.wxr.model.Website;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Component;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.nio.file.Files;
@@ -17,7 +17,7 @@ import java.util.Optional;
  * @since 2020/12
  */
 @Log4j2
-@Component
+@ApplicationScoped
 public class WpCliXmlParser {
 
     /**

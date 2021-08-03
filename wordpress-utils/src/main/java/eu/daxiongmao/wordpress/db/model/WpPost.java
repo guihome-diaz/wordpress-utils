@@ -1,5 +1,6 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -35,7 +36,7 @@ import java.util.Optional;
         }
 )
 @NoArgsConstructor
-public class WpPost implements Serializable {
+public class WpPost extends PanacheEntityBase implements Serializable {
 
     /** Date format in DB for post time (publication and updates) */
     public static final String POST_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

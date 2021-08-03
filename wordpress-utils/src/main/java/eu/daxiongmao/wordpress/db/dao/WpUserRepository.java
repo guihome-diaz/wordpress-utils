@@ -1,10 +1,11 @@
 package eu.daxiongmao.wordpress.db.dao;
 
 import eu.daxiongmao.wordpress.db.model.WpUser;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
-@Repository
-public interface WpUserRepository extends CrudRepository<WpUser, Integer> {
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class WpUserRepository implements PanacheRepository<WpUser> {
 
 }

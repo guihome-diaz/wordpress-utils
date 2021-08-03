@@ -2,21 +2,21 @@ package eu.daxiongmao.wordpress.db.dao;
 
 
 import eu.daxiongmao.wordpress.db.model.WpUser;
+import io.quarkus.test.junit.QuarkusTest;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest
+@QuarkusTest
 @Log4j2
 public class WpUserDaoIT {
 
-    @Autowired
+    @Inject
     WpUserDao userDao;
 
     @Test
