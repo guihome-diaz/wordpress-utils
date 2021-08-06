@@ -1,5 +1,9 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import eu.daxiongmao.wordpress.db.model.enums.WpPostCommentStatus;
+import eu.daxiongmao.wordpress.db.model.enums.WpPostPingStatus;
+import eu.daxiongmao.wordpress.db.model.enums.WpPostStatus;
+import eu.daxiongmao.wordpress.db.model.enums.WpPostType;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordpress.db.model;
+package eu.daxiongmao.wordpress.db.model.enums;
 
 import org.apache.commons.lang3.StringUtils;
 
