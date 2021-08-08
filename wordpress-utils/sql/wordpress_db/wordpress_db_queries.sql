@@ -16,3 +16,6 @@ select * from baby_users users
     order by users.user_login, usermeta.meta_key;
 
 select distinct meta_key from baby_usermeta usermeta order by meta_key;
+
+-- Options
+select * from baby_options order by option_name;
