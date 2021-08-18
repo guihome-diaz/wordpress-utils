@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,6 +30,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
+@ToString
 public class WpOption extends PanacheEntityBase implements Serializable {
 
     public static String BOOLEAN_TRUE = "yes";

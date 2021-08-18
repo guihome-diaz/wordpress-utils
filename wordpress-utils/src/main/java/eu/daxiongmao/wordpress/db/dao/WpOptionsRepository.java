@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +36,7 @@ public class WpOptionsRepository implements PanacheRepository<WpOption> {
         if (StringUtils.isBlank(optionName)) {
             return null;
         }
-        // use the LIKE operator in case the option is prefixed (ex: baby_user_rights / user_rights)
-        final TypedQuery<WpOption> query = em.createQuery("SELECT option FROM WpOption option where option.name like :optionName", WpOption.class);
-        query.setParameter("optionName", "%" + optionName);
-        return query.getSingleResult();
+        return WpOption.find("name like ?1", "%" + optionName).firstResult();
     }
 
 }
