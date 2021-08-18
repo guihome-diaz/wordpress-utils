@@ -61,12 +61,44 @@ import java.util.Map;
  */
 public class SerializedPhpParser {
 
+    public String phpSerializeStringToJson(final String input) throws SerializedPhpParserException {
+        // Parse DB content to Java Object
+        final Object dto = parsePhpSerializeString(input);
+        if (dto == null) {
+            return "";
+        }
+
+        // Cast object to JSON
+        return objectToJson(dto, "");
+    }
+
+    private String objectToJson(final Object input, final String separator) {
+        final StringBuilder json = new StringBuilder();
+        if (input instanceof String || input instanceof Integer || input instanceof Double || input instanceof Boolean) {
+            // Standard type, just print it out
+            json.append(String.format("%s\"%s\"", separator, input));
+        } else if (input instanceof Map) {
+            // array: use recursive calls
+            json.append(String.format("%s{%n", separator));
+            final int mapSize = ((Map) input).size();
+            int counter = 1;
+            for (Map.Entry<Object, Object> entry : ((HashMap<Object, Object>) input).entrySet()) {
+                final String key = objectToJson(entry.getKey(), separator + "  ");
+                final String value = objectToJson(entry.getValue(), (entry.getValue() instanceof Map ? separator + "  " : ""));
+                json.append(String.format("%s: %s%s%n", key, value, (counter < mapSize ? "," : "")));
+                counter++;
+            }
+            json.append(String.format("%s}", separator));
+        }
+        return json.toString();
+    }
+
     /**
      * <p>To parse an object encoded php_serialize() to Java OBJECT</p>
      * @param input String to process
      * @return result as Java object
      */
-    public Object parsePhpSerializeString(final String input) throws SerializedPhpParserException {
+    protected Object parsePhpSerializeString(final String input) throws SerializedPhpParserException {
         return parseItem(input).getResult();
     }
 

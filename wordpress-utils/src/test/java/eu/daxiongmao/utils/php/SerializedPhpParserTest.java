@@ -83,6 +83,19 @@ public class SerializedPhpParserTest {
     }
 
     @Test
+    public void parseSimpleArrayToJson() throws SerializedPhpParserException {
+        final SerializedPhpParser parser = new SerializedPhpParser();
+        final String input = "a:2:{s:4:\"name\";s:10:\"Subscriber\";s:7:\"is_test\";b:1;}";
+
+        String json = parser.phpSerializeStringToJson(input);
+        Assertions.assertNotNull(json);
+        System.out.println(json);
+
+        String expectation = String.format("{%n  \"name\": \"Subscriber\",%n  \"is_test\": \"true\"%n}");
+        Assertions.assertEquals(expectation, json);
+    }
+
+    @Test
     public void parseAdvancedArray() throws SerializedPhpParserException {
         final SerializedPhpParser parser = new SerializedPhpParser();
         final String input = "a:2:{s:4:\"name\";s:10:\"Subscriber\";s:12:\"capabilities\";a:3:{s:4:\"read\";b:1;s:7:\"level_0\";b:1;s:24:\"NextGEN Gallery overview\";b:0;}}";
@@ -103,23 +116,19 @@ public class SerializedPhpParserTest {
     }
 
     @Test
-    public void parsePhpSerialize() throws SerializedPhpParserException {
+    public void parseAdvancedArrayToJson() throws SerializedPhpParserException {
         final SerializedPhpParser parser = new SerializedPhpParser();
         final String input = "a:2:{s:4:\"name\";s:10:\"Subscriber\";s:12:\"capabilities\";a:3:{s:4:\"read\";b:1;s:7:\"level_0\";b:1;s:24:\"NextGEN Gallery overview\";b:0;}}";
 
-        Object result = parser.parsePhpSerializeString(input);
-        Assertions.assertNotNull(result);
-        Assertions.assertFalse(((Map<Object,Object>) result).isEmpty());
-        Assertions.assertEquals(2, ((Map<Object,Object>) result).size());
-        Assertions.assertNotNull(((Map<Object,Object>) result).get("name"));
-        Assertions.assertEquals("Subscriber", ((Map<Object,Object>) result).get("name"));
-        Assertions.assertNotNull(((Map<Object,Object>) result).get("capabilities"));
+        String json = parser.phpSerializeStringToJson(input);
+        Assertions.assertNotNull(json);
+        System.out.println(json);
 
-        Assertions.assertFalse(((Map<Object,Object>)(((Map<Object,Object>) result).get("capabilities"))).isEmpty());
-        Assertions.assertEquals(3, ((Map<Object,Object>)(((Map<Object,Object>) result).get("capabilities"))).size());
-        Assertions.assertEquals(true, ((Map<Object,Object>)(((Map<Object,Object>) result).get("capabilities"))).get("read"));
-        Assertions.assertEquals(true, ((Map<Object,Object>)(((Map<Object,Object>) result).get("capabilities"))).get("level_0"));
-        Assertions.assertEquals(false, ((Map<Object,Object>)(((Map<Object,Object>) result).get("capabilities"))).get("NextGEN Gallery overview"));
+        String expectation = String.format("{%n  \"capabilities\":   {" +
+                "%n    \"read\": \"true\",%n    \"NextGEN Gallery overview\": \"false\",%n    \"level_0\": \"true\"%n" +
+                "  },%n  \"name\": \"Subscriber\"%n}");
+        Assertions.assertEquals(expectation, json);
     }
+
 }
 
