@@ -2,12 +2,12 @@ package eu.daxiongmao.wordpress.wxr.xml;
 
 import eu.daxiongmao.wordpress.wxr.WpCliXmlTag;
 import eu.daxiongmao.wordpress.wxr.model.*;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;

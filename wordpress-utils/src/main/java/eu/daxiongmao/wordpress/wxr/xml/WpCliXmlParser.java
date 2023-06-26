@@ -1,9 +1,9 @@
 package eu.daxiongmao.wordpress.wxr.xml;
 
 import eu.daxiongmao.wordpress.wxr.model.Website;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.log4j.Log4j2;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.nio.file.Files;

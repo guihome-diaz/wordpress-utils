@@ -3,10 +3,10 @@ package eu.daxiongmao.wordpress.db.services;
 import eu.daxiongmao.wordpress.db.dao.WpUserDao;
 import eu.daxiongmao.wordpress.db.dao.WpUserRepository;
 import eu.daxiongmao.wordpress.db.model.WpUser;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped

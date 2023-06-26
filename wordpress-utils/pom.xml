@@ -5,7 +5,7 @@
 
 	<groupId>eu.daxiongmao</groupId>
 	<artifactId>wordpress-utils</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>wordpress-utils</name>
 	<description>Set of utilities to work with wordpress</description>
 
@@ -14,20 +14,20 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Build -->
-		<java.version>11</java.version>
-		<compiler-plugin.version>3.8.1</compiler-plugin.version>
+		<java.version>17</java.version>
+		<compiler-plugin.version>3.11.0</compiler-plugin.version>
 		<maven.compiler.parameters>true</maven.compiler.parameters>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<!-- Ease the work of the develop: tell maven to download javadoc and sources when possible -->
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<!-- Ease the work: tell maven to download javadoc and sources when possible -->
 		<downloadSources>true</downloadSources>
 		<downloadJavadocs>true</downloadJavadocs>
 		<!-- ##### Quarkus ##### -->
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-		<quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+		<quarkus.platform.version>3.1.2.Final</quarkus.platform.version>
 		<!-- Specific override. This is because Quarkus uses jUnit5 and default surefire version is not correct in BOM -->
-		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+		<surefire-plugin.version>3.1.2</surefire-plugin.version>
 	</properties>
 
 	<!-- Like Spring-Boot, this is required to import common settings and dependencies -->
@@ -106,7 +106,7 @@
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<version>2.7.3</version>
+			<version>3.1.4</version>
 		</dependency>
 		<!-- H2 embedded database for tests -->
 		<dependency>
@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
+			<version>1.18.28</version>
 		</dependency>
 		<!-- Commons utilities -->
 		<dependency>

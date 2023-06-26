@@ -2,12 +2,13 @@ package eu.daxiongmao.wordpress.db.dao;
 
 import eu.daxiongmao.wordpress.db.model.WpOption;
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+
 import java.util.List;
 
 @QuarkusTest

@@ -2,11 +2,11 @@ package eu.daxiongmao.wordpress.wxr.xml;
 
 import eu.daxiongmao.wordpress.wxr.model.Website;
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

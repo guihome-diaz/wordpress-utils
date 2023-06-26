@@ -4,11 +4,11 @@ import eu.daxiongmao.wordpress.db.model.WpOption;
 import eu.daxiongmao.wordpress.db.model.dtos.WpRole;
 import eu.daxiongmao.wordpress.db.model.enums.WpOptionEnum;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 

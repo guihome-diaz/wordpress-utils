@@ -1,11 +1,11 @@
 package eu.daxiongmao.wordpress.db.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**

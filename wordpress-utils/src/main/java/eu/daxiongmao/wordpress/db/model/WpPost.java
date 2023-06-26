@@ -5,13 +5,13 @@ import eu.daxiongmao.wordpress.db.model.enums.WpPostPingStatus;
 import eu.daxiongmao.wordpress.db.model.enums.WpPostStatus;
 import eu.daxiongmao.wordpress.db.model.enums.WpPostType;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Nationalized;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
