@@ -1,7 +1,7 @@
 package eu.daxiongmao.wordpress.db.model.enums;
 
 /**
- * Specific names for Wordpress options
+ * Specific names for WordPress options
  */
 public enum WpOptionEnum {
 

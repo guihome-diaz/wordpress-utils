@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Wordpress role, based on https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-wp-role.php
- * @author wordpress team
+ * WordPress role, based on https://core.trac.wordpress.org/browser/trunk/src/wp-includes/class-wp-role.php
+ * @author WordPress team
  * @author add hard coded default profiles
  * @version 1.0
  * @since wp4.4.0

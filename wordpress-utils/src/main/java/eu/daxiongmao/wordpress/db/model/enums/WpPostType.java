@@ -5,15 +5,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 
 /**
- * Wordpress posts' types
+ * WordPress posts' types
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation)
+ * @author Guillaume Diaz (based on WordPress documentation and installation)
  */
 public enum WpPostType {
 
     // ####################################################
-    // Wordpress core features
+    // WordPress core features
     // ####################################################
 
     /** Link to embedded media (picture, video) inside the post.
@@ -121,7 +121,7 @@ public enum WpPostType {
     }
 
     /**
-     * To retrieve the corresponding Wordpress posts' type.
+     * To retrieve the corresponding WordPress posts' type.
      * @param dbValue search value. It must not be null or blank
      * @return corresponding status, if it exists. Else EMPTY
      * @throws IllegalArgumentException you must provide a not null and not blank argument

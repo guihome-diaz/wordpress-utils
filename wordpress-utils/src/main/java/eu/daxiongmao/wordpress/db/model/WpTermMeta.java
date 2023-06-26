@@ -9,11 +9,11 @@ import lombok.NonNull;
 import java.io.Serializable;
 
 /**
- * Wordpress core table: TERMMETA.
- * Each term features information called the meta data and it is stored in wp_termmeta.
+ * WordPress core table: TERMMETA.
+ * Each term features information called the metadata, and it is stored in wp_termmeta.
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity

@@ -10,14 +10,14 @@ import java.io.Serializable;
 
 
 /**
- * <p>Wordpress core table: TERM_RELATIONSHIPS.<br>
+ * <p>WordPress core table: TERM_RELATIONSHIPS.<br>
  * Posts are associated with categories and tags from the wp_terms table and this association is maintained in the wp_term_relationships table.
  * The association of links to their respective categories are also kept in this table.</p>
  * <p>Finally, once a term is assigned to an object like a post, the <code>wp_term_relationships</code> table is used to record it.</p>
  * <p>technically: this is a join table</p>
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity

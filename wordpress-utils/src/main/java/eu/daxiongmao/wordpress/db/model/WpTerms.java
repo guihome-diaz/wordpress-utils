@@ -9,7 +9,7 @@ import lombok.NonNull;
 import java.io.Serializable;
 
 /**
- * <p>Wordpress core table: TERMS.<br>
+ * <p>WordPress core table: TERMS.<br>
  * The categories for both posts and links and the tags for posts are found within the wp_terms table.</p>
  * <p>When a term is created it is first added to the <code>terms</code> then it will be inserted in <code>term_taxonomy</code></p>
  * @version 1.0

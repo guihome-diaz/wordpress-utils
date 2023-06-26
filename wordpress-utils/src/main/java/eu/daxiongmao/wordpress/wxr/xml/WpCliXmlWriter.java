@@ -22,7 +22,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * To generate a Wordpress export file in the same format as wp-cli (WXR format)
+ * To generate a WordPress export file in the same format as wp-cli (WXR format)
  * @author Guillaume Diaz
  * @version 1.0 (2020/12)
  * @since 2020/12
@@ -34,7 +34,7 @@ public class WpCliXmlWriter {
     private final String WXR_VERSION = "1.2";
 
     /**
-     * To generate a wordpress export file in the same format as WP-cli (WXR format)
+     * To generate a WordPress export file in the same format as WP-cli (WXR format)
      * @param outputFile complete path to save the file
      * @param website data object to write
      * @return boolean, "true" if the operation succeed
@@ -42,7 +42,7 @@ public class WpCliXmlWriter {
     public boolean writeWxrFile(final Path outputFile, final Website website) {
         // Arg check
         if (website == null) {
-            log.warn("Cannot generate wordpress export file (WXR): no data provided");
+            log.warn("Cannot generate WordPress export file (WXR): no data provided");
             return false;
         }
 

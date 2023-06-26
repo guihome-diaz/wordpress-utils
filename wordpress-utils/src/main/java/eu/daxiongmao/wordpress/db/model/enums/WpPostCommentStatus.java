@@ -5,10 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 
 /**
- * Wordpress' posts' comments statuses
+ * WordPress' posts' comments statuses
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://wordpress.org/support/article/post-status/)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://wordpress.org/support/article/post-status/)
  */
 public enum WpPostCommentStatus {
 
@@ -32,7 +32,7 @@ public enum WpPostCommentStatus {
     }
 
     /**
-     * To retrieve the corresponding Wordpress posts' comment status.
+     * To retrieve the corresponding WordPress posts' comment status.
      * @param dbValue search value. It must not be null or blank
      * @return corresponding status, if it exists. Else EMPTY
      * @throws IllegalArgumentException you must provide a not null and not blank argument

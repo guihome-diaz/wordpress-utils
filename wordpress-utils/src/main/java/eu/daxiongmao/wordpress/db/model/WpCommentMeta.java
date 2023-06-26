@@ -10,10 +10,10 @@ import java.io.Serializable;
 
 /**
  * Wordpress core table:  COMMENTMETA
- * Each comment features information called the meta data and it is stored in the wp_commentmeta.
+ * Each comment features information called the metadata, and it is stored in the wp_commentmeta.
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity

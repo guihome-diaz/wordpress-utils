@@ -13,11 +13,11 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
 /**
- * Wordpress core table: COMMENTS
+ * WordPress core table: COMMENTS
  * A comment is linked to a particular post ID
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity

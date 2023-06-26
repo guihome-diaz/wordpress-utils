@@ -19,11 +19,11 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
- * Wordpress core table: POSTS.
+ * WordPress core table: POSTS.
  * "The core of the WordPress data is the posts"
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
