@@ -1,22 +1,23 @@
 package eu.daxiongmao.wordpress.db.dao;
 
 import eu.daxiongmao.wordpress.db.model.WpUser;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class WpUserDaoImpl implements WpUserDao {
+@ApplicationScoped
+public class WpUserDaoImpl implements WpUserDao, PanacheRepository<WpUser> {
 
     private final EntityManager em;
 
-    @Autowired
+    @Inject
     public WpUserDaoImpl(EntityManager em) {
         this.em = em;
     }

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Stack;
 
 /**
- * To parse the XML file from Wordpress WP-CLI (WXR files).
+ * To parse the XML file from WordPress WP-CLI (WXR files).
  * FIXME to be continued (https://howtodoinjava.com/java/xml/sax-parser-read-xml-example/)
  *
  * @author Guillaume Diaz

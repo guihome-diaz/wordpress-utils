@@ -1,4 +1,4 @@
-package eu.daxiongmao.wordpress.db.model;
+package eu.daxiongmao.wordpress.db.model.enums;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -6,10 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 
 /**
- * Wordpress posts' statuses
+ * WordPress posts' statuses
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://wordpress.org/support/article/post-status/)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://wordpress.org/support/article/post-status/)
  */
 public enum WpPostStatus {
 

@@ -17,13 +17,13 @@ public enum ItemType {
     /** Website page */
     PAGE,
 
-    /** Better notifications for wordpress (plug-in) */
+    /** Better notifications for WordPress (plug-in) */
     BNFW_NOTIFICATION,
 
     /** Timeline Express # announcement */
     TE_ANNOUNCEMENTS,
 
-    /** Wordpress Contact Form 7 */
+    /** WordPress Contact Form 7 */
     WPCF7_CONTACT_FORM
     ;
 

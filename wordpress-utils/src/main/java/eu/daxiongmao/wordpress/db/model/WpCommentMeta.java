@@ -1,18 +1,19 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Wordpress core table:  COMMENTMETA
- * Each comment features information called the meta data and it is stored in the wp_commentmeta.
+ * Each comment features information called the metadata, and it is stored in the wp_commentmeta.
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
@@ -27,7 +28,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class WpCommentMeta implements Serializable {
+public class WpCommentMeta extends PanacheEntityBase implements Serializable {
 
     /** technical identifier */
     @NonNull

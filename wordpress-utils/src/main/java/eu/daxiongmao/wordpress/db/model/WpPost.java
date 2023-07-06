@@ -1,12 +1,17 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import eu.daxiongmao.wordpress.db.model.enums.WpPostCommentStatus;
+import eu.daxiongmao.wordpress.db.model.enums.WpPostPingStatus;
+import eu.daxiongmao.wordpress.db.model.enums.WpPostStatus;
+import eu.daxiongmao.wordpress.db.model.enums.WpPostType;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Nationalized;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -14,11 +19,11 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
- * Wordpress core table: POSTS.
+ * WordPress core table: POSTS.
  * "The core of the WordPress data is the posts"
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
@@ -35,7 +40,7 @@ import java.util.Optional;
         }
 )
 @NoArgsConstructor
-public class WpPost implements Serializable {
+public class WpPost extends PanacheEntityBase implements Serializable {
 
     /** Date format in DB for post time (publication and updates) */
     public static final String POST_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

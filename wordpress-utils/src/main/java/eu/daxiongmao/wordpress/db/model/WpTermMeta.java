@@ -1,18 +1,19 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Wordpress core table: TERMMETA.
- * Each term features information called the meta data and it is stored in wp_termmeta.
+ * WordPress core table: TERMMETA.
+ * Each term features information called the metadata, and it is stored in wp_termmeta.
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
@@ -27,7 +28,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class WpTermMeta implements Serializable {
+public class WpTermMeta extends PanacheEntityBase implements Serializable {
 
     /** technical identifier */
     @NonNull

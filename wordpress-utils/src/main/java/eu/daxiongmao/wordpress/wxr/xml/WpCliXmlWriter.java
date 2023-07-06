@@ -2,9 +2,9 @@ package eu.daxiongmao.wordpress.wxr.xml;
 
 import eu.daxiongmao.wordpress.wxr.WpCliXmlTag;
 import eu.daxiongmao.wordpress.wxr.model.*;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -22,19 +22,19 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * To generate a Wordpress export file in the same format as wp-cli (WXR format)
+ * To generate a WordPress export file in the same format as wp-cli (WXR format)
  * @author Guillaume Diaz
  * @version 1.0 (2020/12)
  * @since 2020/12
  */
 @Log4j2
-@Component
+@ApplicationScoped
 public class WpCliXmlWriter {
 
     private final String WXR_VERSION = "1.2";
 
     /**
-     * To generate a wordpress export file in the same format as WP-cli (WXR format)
+     * To generate a WordPress export file in the same format as WP-cli (WXR format)
      * @param outputFile complete path to save the file
      * @param website data object to write
      * @return boolean, "true" if the operation succeed
@@ -42,7 +42,7 @@ public class WpCliXmlWriter {
     public boolean writeWxrFile(final Path outputFile, final Website website) {
         // Arg check
         if (website == null) {
-            log.warn("Cannot generate wordpress export file (WXR): no data provided");
+            log.warn("Cannot generate WordPress export file (WXR): no data provided");
             return false;
         }
 

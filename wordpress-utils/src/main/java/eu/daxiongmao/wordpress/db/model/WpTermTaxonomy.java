@@ -1,20 +1,21 @@
 package eu.daxiongmao.wordpress.db.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * <p>Wordpress core table: TERM_TAXONOMY.<br>
+ * <p>WordPress core table: TERM_TAXONOMY.<br>
  * This table describes the taxonomy (category, link, or tag) for the entries in the wp_terms table.</p>
  * <p>Once a term has been added in <code>terms</code>,
  * it is also added to the <code>term_taxonomy</code> table which defines the taxonomy the term belongs to.</p>
  * @version 1.0
  * @since 2020/12
- * @author Guillaume Diaz (based on Wordpress documentation and installation, see https://codex.wordpress.org/Database_Description)
+ * @author Guillaume Diaz (based on WordPress documentation and installation, see https://codex.wordpress.org/Database_Description)
  */
 @Data
 @Entity
@@ -26,7 +27,7 @@ import java.io.Serializable;
         }
 )
 @NoArgsConstructor
-public class WpTermTaxonomy implements Serializable {
+public class WpTermTaxonomy extends PanacheEntityBase implements Serializable {
 
     @NonNull
     @Id

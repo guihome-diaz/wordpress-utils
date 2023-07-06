@@ -2,82 +2,101 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 
 	<groupId>eu.daxiongmao</groupId>
 	<artifactId>wordpress-utils</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>wordpress-utils</name>
 	<description>Set of utilities to work with wordpress</description>
 
 	<properties>
+		<!-- Project settings -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>11</java.version>
+		<!-- Build -->
+		<java.version>17</java.version>
+		<compiler-plugin.version>3.11.0</compiler-plugin.version>
+		<maven.compiler.parameters>true</maven.compiler.parameters>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<!-- Ease the work: tell maven to download javadoc and sources when possible -->
 		<downloadSources>true</downloadSources>
 		<downloadJavadocs>true</downloadJavadocs>
+		<!-- ##### Quarkus ##### -->
+		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+		<quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+		<quarkus.platform.version>3.1.2.Final</quarkus.platform.version>
+		<!-- Specific override. This is because Quarkus uses jUnit5 and default surefire version is not correct in BOM -->
+		<surefire-plugin.version>3.1.2</surefire-plugin.version>
 	</properties>
 
-	<dependencies>
+	<!-- Like Spring-Boot, this is required to import common settings and dependencies -->
+	<!-- QUARKUS dependencies BOM -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${quarkus.platform.group-id}</groupId>
+				<artifactId>${quarkus.platform.artifact-id}</artifactId>
+				<version>${quarkus.platform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
+	<dependencies>
 		<!-- ################ -->
-		<!-- Spring framework -->
+		<!--      Quarkus     -->
 		<!-- ################ -->
-		<!-- Monitoring -->
+		<!-- Core module mandatory (dependency injection): ArC, the CDI container, is bootstrapped at build time. -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-arc</artifactId>
 		</dependency>
-		<!-- Database access and object mapping -->
+
+		<!-- ~ ~ ~ ~ ~ ~ ~ ~ web-services ~ ~ ~ ~ ~ ~ ~ ~ -->
+		<!-- To publish REST web-services -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-resteasy</artifactId>
 		</dependency>
-		<!-- Web features -->
+		<!-- To handle JSON -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-resteasy-jackson</artifactId>
 		</dependency>
-		<!-- To serialize / deserialize JSON objects -->
+		<!-- Web-services documentation (OpenApi)-->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-json</artifactId>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-smallrye-openapi</artifactId>
 		</dependency>
-		<!-- API documentation -->
-		<!-- Swagger will be available at:     http://server:port/context-path/swagger-ui.html -->
-		<!-- OpenAPI 3 will be available at:   http://server:port/context-path/v3/api-docs -->
-		<!-- see https://springdoc.org for details -->
+
+		<!-- ~ ~ ~ ~ ~ ~ ~ ~ database ~ ~ ~ ~ ~ ~ ~ ~ -->
+		<!-- Database object mapping + Hibernate to query DB -->
+		<!-- Key points:
+		        * quarkus-hibernate-orm = plain Hibernate (no default CRUD)
+		        * quarkus-hibernate-orm-panache = Hibernate + library "Panache" to reproduce the SpringBoot @Repository behavior
+		 -->
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.5.10</version>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-hibernate-orm-panache</artifactId>
 		</dependency>
-		<!-- Development tools -->
+		<!-- Interaction with MySQL -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-jdbc-mysql</artifactId>
 		</dependency>
-		<!-- exclude logback , add log4j2 -->
+		<!-- Interaction with H2 -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-jdbc-h2</artifactId>
 		</dependency>
+
+		<!-- ~ ~ ~ ~ ~ ~ ~ ~ logging ~ ~ ~ ~ ~ ~ ~ ~ -->
+		<!-- Use log4j2 instead of Quarkus default JBoss logging -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<groupId>org.jboss.logmanager</groupId>
+			<artifactId>log4j2-jboss-logmanager</artifactId>
 		</dependency>
 
 		<!-- ############### -->
@@ -87,7 +106,7 @@
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<version>2.7.3</version>
+			<version>3.1.4</version>
 		</dependency>
 		<!-- H2 embedded database for tests -->
 		<dependency>
@@ -103,7 +122,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.28</version>
 		</dependency>
 		<!-- Commons utilities -->
 		<dependency>
@@ -121,9 +140,16 @@
 		<!-- ##### -->
 		<!-- Tests -->
 		<!-- ##### -->
+		<!-- Unit tests -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-junit5</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- REST web-services tests -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -131,19 +157,86 @@
 
 	<build>
 		<plugins>
+			<!-- QUARKUS builds
+				 Application packaging + support for development mode. -->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>${quarkus.platform.group-id}</groupId>
+				<artifactId>quarkus-maven-plugin</artifactId>
+				<version>${quarkus.platform.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+							<goal>generate-code</goal>
+							<goal>generate-code-tests</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Maven standard Java compilation -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler-plugin.version}</version>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<parameters>${maven.compiler.parameters}</parameters>
 				</configuration>
 			</plugin>
+
+			<!-- To play UNIT tests (Surefire) -->
+			<!-- Quarkus uses Junit 5 tests: as a result the version of the Surefire Maven Plugin must be set (BOM version isn't correct) -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire-plugin.version}</version>
+				<configuration>
+					<systemPropertyVariables>
+						<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+						<maven.home>${maven.home}</maven.home>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
+
+
+	<profiles>
+		<!-- To produce a native executable (.exe or .sh) -->
+		<profile>
+			<id>native</id>
+			<activation>
+				<property>
+					<name>native</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- To play INTEGRATION tests at package generation time -->
+					<plugin>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>${surefire-plugin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+								<configuration>
+									<systemPropertyVariables>
+										<native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+										<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+										<maven.home>${maven.home}</maven.home>
+									</systemPropertyVariables>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<quarkus.package.type>native</quarkus.package.type>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

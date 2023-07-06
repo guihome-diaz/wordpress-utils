@@ -32,8 +32,8 @@
         <Logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG" />
         <!-- Database operations -->
         <Logger name="org.hibernate" level="INFO" />
-        <!-- Spring framework -->
-        <Logger name="org.springframework" level="INFO" />
+        <!-- Quarkus framework -->
+        <Logger name="io.quarkus" level="DEBUG" />
         <!-- Embedded web server (Tomcat) -->
         <Logger name="org.apache.tomcat" level="WARN" />
 

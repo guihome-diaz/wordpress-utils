@@ -43,7 +43,7 @@ public class Item implements Serializable {
     /** Description of the item (optional). Field &lt;description&gt; */
     private String description;
 
-    /** Content as a string. It can be HTML or plain text. It usually include wordpress data. Field &lt;content:encoded&gt; */
+    /** Content as a string. It can be HTML or plain text. It usually include WordPress data. Field &lt;content:encoded&gt; */
     @ToString.Exclude
     private String content;
 
